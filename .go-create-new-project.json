@@ -1,0 +1,87 @@
+{
+  "status": "verified",
+  "reservation_id": "dec1a525f7c236f48c14",
+  "created_at": "2026-08-24T07:26:40+00:00",
+  "date": "2026-08-24",
+  "tier": "large",
+  "path": "/Users/tog_11/code/我的go/30个/codex-collation-workbench-117",
+  "summary": {
+    "name": "古籍异文校勘与版本关系工作台",
+    "readme_language": "zh-CN",
+    "core_problem": "古籍整理团队需要把不同传本的段落、字词异文和缺损位置对齐，在保留原始抄录证据的同时，依据校勘规则形成可解释的底本建议和分歧处理队列。",
+    "users": [
+      "古籍整理研究者",
+      "版本学专家",
+      "数字人文编辑",
+      "校勘复核人员"
+    ],
+    "domain_objects": [
+      "文献集合",
+      "传本",
+      "卷册",
+      "段落定位",
+      "字词异文",
+      "缺损标记",
+      "校勘规则",
+      "底本候选",
+      "分歧卡片",
+      "对齐批次"
+    ],
+    "workflows": [
+      "创建文献集合并登记传本元数据与卷册范围",
+      "导入带定位标记的段落摘录并生成内容寻址文本块",
+      "按段落和字位对齐多个传本，记录缺损、增衍和通假异文",
+      "运行校勘规则计算底本候选及置信理由",
+      "把无法自动决定的分歧送入复核队列并发布新规则版本"
+    ],
+    "rules": [
+      "传本定位必须包含卷、叶、行和字位，缺少任一坐标不能进入对齐批次",
+      "原始摘录按内容摘要寻址且不可覆盖，修订只能产生新的文本块",
+      "异文类型必须来自术语字典，增衍、脱文和倒文不能混用",
+      "底本候选必须同时满足版本优先级、字形可信度和缺损惩罚的加权边界",
+      "规则版本发布后只能用于新的对齐批次，历史候选保留其规则指纹",
+      "后台对齐任务按卷册分片执行，失败分片可单独重放而不重复写入结果"
+    ],
+    "modules": [
+      "文献集合与传本",
+      "卷册定位",
+      "内容寻址文本块",
+      "段落对齐",
+      "异文分类",
+      "缺损与增衍",
+      "校勘规则引擎",
+      "底本评分",
+      "分歧复核队列",
+      "分片任务调度",
+      "服务端渲染校勘页面"
+    ],
+    "api_surface": [
+      "文献集合、传本和卷册 HTTP API",
+      "摘录、定位和对齐批次 HTTP API",
+      "异文、规则版本和底本候选 HTTP API",
+      "分歧队列、任务状态和术语字典 HTTP API"
+    ],
+    "frontend": {
+      "technology": "Go html/template 服务端渲染页面 + 原生 JavaScript 表格式校勘交互",
+      "entrypoint": "web/collation.html 由 Go 模板渲染并使用 fetch 调用 JSON API",
+      "api_calls": [
+        "GET /api/codex/collections",
+        "POST /api/codex/witnesses",
+        "POST /api/codex/collations",
+        "GET /api/codex/divergences"
+      ],
+      "key_flows": [
+        "创建文献集合并登记传本卷册定位",
+        "提交段落摘录并启动分片对齐批次",
+        "查看异文对齐结果与底本评分理由",
+        "处理分歧卡片并发布新的校勘规则版本"
+      ]
+    }
+  },
+  "fingerprint": "7cfd799dd66fe3d14a133768a0f8c04f9f2cccd8198bcdadee1500ea90d05efe",
+  "preexisting": false,
+  "verified_at": "2026-08-24T08:02:04+00:00",
+  "go_production_files": 170,
+  "go_effective_lines": 5005,
+  "test_files": 0
+}
