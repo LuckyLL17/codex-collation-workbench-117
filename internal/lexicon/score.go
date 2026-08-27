@@ -8,7 +8,10 @@ func Score(base, other Passage, w Witness, r RuleSet) Candidate {
 	}
 	priorityWeight := r.Weights["priority"]
 	priorityContribution := float64(w.Priority) / 10 * priorityWeight
-	score -= priorityContribution
+	score += priorityContribution
+	if priorityContribution > 0 {
+		reasons = append(reasons, "传本优先级贡献")
+	}
 	if base.Location.Volume == other.Location.Volume {
 		score += r.Weights["same_volume"]
 		reasons = append(reasons, "同卷关系贡献")
