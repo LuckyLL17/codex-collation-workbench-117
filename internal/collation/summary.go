@@ -16,7 +16,7 @@ func (s *State) Summary() map[string]any {
 		"collations":        len(s.collations),
 		"tasks":             len(s.tasks),
 		"attempts":          attempts,
-		"attempt_semantics": "double",
+		"attempt_semantics": "single",
 		"divergences":       len(s.divergences),
 		"at":                time.Now().UTC(),
 	}
